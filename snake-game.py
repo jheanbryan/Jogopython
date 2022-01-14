@@ -17,6 +17,8 @@ altura = 480
 tamanho = 10
 pos_x = randint(0, (largura - tamanho) /10) *10
 pos_y = randint(0, (altura - tamanho) /10) *10
+x_maca = randint(0, (largura - tamanho) /10) *10
+y_maca = randint(0, (altura - tamanho) /10) *10
 velocidade_x = 0
 velocidade_y = 0
 relogio = pygame.time.Clock()
@@ -46,14 +48,21 @@ while sair:
                 velocidade_y = tamanho
                 
         print(event)  #printar no prompt o que ta acontecendo
-    fundo.fill(branco) #cor de funo
-    pygame.draw.rect(fundo, azul, [pos_x, pos_y, tamanho, tamanho]) #desenhar o quadrado
-    pygame.draw.rect(fundo, vermelho, [pos_x, pos_y, tamanho, tamanho]) #desenhar o quadrado
+    fundo.fill(branco) #cor de fundo
+    serpente = pygame.draw.rect(fundo, azul, [pos_x, pos_y, tamanho, tamanho]) #desenhar o quadrado (serpente)
+    maca = pygame.draw.circle(fundo, vermelho, (x_maca, y_maca), 5, 5) #desenhar o circulo (maçã)
     
     pos_x += velocidade_x #andar no eixo x
     pos_y += velocidade_y #andar no eixo y
     pygame.display.update() #recarregar a janela
     relogio.tick(10)
     #pygame.draw.circle(fundo, azul, [pos_x, pos_y, tamanho, tamanho])
+    
+    if pos_x == x_maca and pos_y == y_maca: #Se a serpente comer a maça
+        print("pegou a maca")
+        tamanho = tamanho + 5 #Serpente ganha tamanho
+    
+        
+        
 #pygame.quit()
 #quit()
