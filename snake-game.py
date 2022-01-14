@@ -30,19 +30,17 @@ while sair:
     for event in pygame.event.get(): #Enquanto acontecer eventos, entra no loop
         if event.type == pygame.QUIT: #Se apertar no [X] que fecha o jogo
             sair = False
+        #Eventos para quando andar para qualquer direção
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT: #Se andar pra esquerda
                 velocidade_y = 0
-                velocidade_x = -tamanho
-                
+                velocidade_x = -tamanho   
             if event.key == pygame.K_RIGHT: #Se andar pra direita
                 velocidade_y = 0
                 velocidade_x = tamanho
-                
             if event.key == pygame.K_UP: #Se andar pra cima
                 velocidade_x = 0
                 velocidade_y = -tamanho
-                
             if event.key == pygame.K_DOWN: #Se andar pra baixo
                 velocidade_x = 0
                 velocidade_y = tamanho
@@ -58,9 +56,19 @@ while sair:
     relogio.tick(10)
     #pygame.draw.circle(fundo, azul, [pos_x, pos_y, tamanho, tamanho])
     
-    if pos_x == x_maca and pos_y == y_maca: #Se a serpente comer a maça
-        print("pegou a maca")
-        tamanho = tamanho + 5 #Serpente ganha tamanho
+    #Eventos para caso a serpente chegar na borda da tela
+    if pos_x >= largura:
+        pos_x = 1
+    if pos_x < 1:
+        pos_x = 639
+    if pos_y >= altura:
+        pos_y = 1
+    if pos_y < 1:
+        pos_y = 479
+        
+    # if pos_x == x_maca and pos_y == y_maca: #Se a serpente comer a maça
+    #     print("pegou a maca")
+    #     tamanho = tamanho + 5 #Serpente ganha tamanho
     
         
         
