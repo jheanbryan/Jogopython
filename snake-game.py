@@ -47,12 +47,19 @@ while sair:
                 
         print(event)  #printar no prompt o que ta acontecendo
     fundo.fill(branco) #cor de fundo
-    serpente = pygame.draw.rect(fundo, azul, [pos_x, pos_y, tamanho, tamanho]) #desenhar o quadrado (serpente)
+    serpente = pygame.draw.rect(fundo, verde, [pos_x, pos_y, tamanho, tamanho]) #desenhar o quadrado (serpente)
     maca = pygame.draw.circle(fundo, vermelho, (x_maca, y_maca), 5, 5) #desenhar o circulo (maçã)
     
     pos_x += velocidade_x #andar no eixo x
     pos_y += velocidade_y #andar no eixo y
     pygame.display.update() #recarregar a janela
+    
+    # pygame.font.init()
+    # pygame.font.SysFont()
+    # pygame.font.size(largura, altura)
+    # pygame.font.Font.metrics(Arial, 'this is text')
+    # pygame.font.Font.render(largura, altura)
+    
     relogio.tick(10)
     #pygame.draw.circle(fundo, azul, [pos_x, pos_y, tamanho, tamanho])
     
@@ -66,8 +73,9 @@ while sair:
     if pos_y < 1:
         pos_y = 479
         
-    # if pos_x == x_maca and pos_y == y_maca: #Se a serpente comer a maça
-    #     print("pegou a maca")
+    #pygameif pos_x == x_maca and pos_y == y_maca: #Se a serpente comer a maça
+        #print("pegou a maca")
+        #desenhar o quadrado (serpente)
     #     tamanho = tamanho + 5 #Serpente ganha tamanho
     
         
