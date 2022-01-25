@@ -19,7 +19,12 @@ tamanho = 10
 relogio = pygame.time.Clock()
 pygame.display.set_caption('Snake') #Nome do jogo
 fundo = pygame.display.set_mode((largura, altura)) #definindo largura e altura da tela
+font = pygame.font.SysFont(None, 25)
 
+def texto(msg, cor):
+    texto_um = font.render(msg, True, cor)
+    fundo.blit(texto_um, [largura/2, altura/2]) 
+    
 def cobra(cobraxy):
     for xy in cobraxy:
         pygame.draw.rect(fundo, preto, [xy[0], xy[1], tamanho, tamanho]) #desenhar o quadrado (serpente)
@@ -43,7 +48,13 @@ def jogo():
   
         
     sair = True
+    fim_de_jogo = False
     while sair:
+        while fim_de_jogo:
+            fundo.fill(branco)   
+            texto('Game Over', vermelho)
+            pygame.display.update()  
+             
         for event in pygame.event.get(): #Enquanto acontecer eventos, entra no loop
             if event.type == pygame.QUIT: #Se apertar no [X] que fecha o jogo
                 sair = False
@@ -79,10 +90,16 @@ def jogo():
         pygame.display.update() #recarregar a janela
         relogio.tick(15)
         
-        
-        #Eventos para caso a serpente chegar na borda da tela
+        if pos_x_cobra == pos_x_maca and pos_y_cobra == pos_y_maca: #Se a serpente comer a maça
+            print("pegou a maca")
+            comprimento_cobra+=10
+            #Maça
+            pos_x_maca = randint(0, (largura - tamanho) /10) *10 #posição x
+            pos_y_maca = randint(0, (altura - tamanho) /10) *10 #posição y
+            
+         #Eventos para caso a serpente chegar na borda da tela
         if pos_x_cobra >= largura:
-            print('game over')
+            print('game over') 
         if pos_x_cobra < 1:
             print('game over')
         if pos_y_cobra >= altura:
@@ -90,19 +107,11 @@ def jogo():
         if pos_y_cobra < 1:
             print('game over')
             
-        if pos_x_cobra == pos_x_maca and pos_y_cobra == pos_y_maca: #Se a serpente comer a maça
-            print("pegou a maca")
-            comprimento_cobra+=1
-            #Maça
-            pos_x_maca = randint(0, (largura - tamanho) /10) *10 #posição x
-            pos_y_maca = randint(0, (altura - tamanho) /10) *10 #posição y
-            
-        print(cobraxy)
-        print(len(cobraxy))
-        if cobra().colider()
-            
-        #     #desenhar o quadrado (serpente)
-        # #     tamanho = tamanho + 5 #Serpente ganha tamanho
+        if any(Bloco == cobra_inicio for Bloco in cobraxy[:-1]):
+            print('game over')
+            fim_de_jogo = True
+        
+              
             
             
     #pygame.quit()
