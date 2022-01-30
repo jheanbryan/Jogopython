@@ -21,13 +21,14 @@ pygame.display.set_caption('Snake') #Nome do jogo
 fundo = pygame.display.set_mode((largura, altura)) #definindo largura e altura da tela
 font = pygame.font.SysFont(None, 25)
 
+#Texto
 def texto(msg, cor):
     texto_um = font.render(msg, True, cor)
-    fundo.blit(texto_um, [largura/2, altura/2]) 
+    fundo.blit(texto_um, [(largura/2) -40, altura/2]) 
     
 def cobra(cobraxy):
     for xy in cobraxy:
-        pygame.draw.rect(fundo, preto, [xy[0], xy[1], tamanho, tamanho]) #desenhar o quadrado (serpente)
+        pygame.draw.rect(fundo, branco, [xy[0], xy[1], tamanho, tamanho]) #desenhar o quadrado (serpente)
     
 def maca(pos_x_maca, pos_y_maca):
         pygame.draw.rect(fundo, vermelho, [pos_x_maca, pos_y_maca, tamanho, tamanho]) #desenhar o quadrado (serpente)
@@ -72,9 +73,10 @@ def jogo():
                 if event.key == pygame.K_DOWN and velocidade_y != tamanho: #Se andar pra baixo
                     velocidade_x = 0
                     velocidade_y = tamanho
+                if event.key == pygame.K_text
                     
             print(event)  #printar no prompt o que ta acontecendo
-        fundo.fill(branco) #cor de fundo      
+        fundo.fill(preto) #cor de fundo      
         pos_x_cobra += velocidade_x #andar no eixo x
         pos_y_cobra += velocidade_y #andar no eixo y
         cobra_inicio = []
@@ -99,14 +101,19 @@ def jogo():
             
          #Eventos para caso a serpente chegar na borda da tela
         if pos_x_cobra >= largura:
-            print('game over') 
+            print('game over')
+            fim_de_jogo = True 
         if pos_x_cobra < 1:
             print('game over')
+            fim_de_jogo = True
         if pos_y_cobra >= altura:
             print('game over')
+            fim_de_jogo = True
         if pos_y_cobra < 1:
             print('game over')
+            fim_de_jogo = True
             
+        #Caso a cobra se morder
         if any(Bloco == cobra_inicio for Bloco in cobraxy[:-1]):
             print('game over')
             fim_de_jogo = True
