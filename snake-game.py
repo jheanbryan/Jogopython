@@ -53,9 +53,8 @@ def jogo():
     while sair:
         while fim_de_jogo:
             fundo.fill(branco)   
-            texto('Game Over', vermelho)
-            pygame.display.update()  
-             
+            texto('Game Over. Pressione r para continuar', vermelho)
+            pygame.display.update()             
         for event in pygame.event.get(): #Enquanto acontecer eventos, entra no loop
             if event.type == pygame.QUIT: #Se apertar no [X] que fecha o jogo
                 sair = False
@@ -73,7 +72,9 @@ def jogo():
                 if event.key == pygame.K_DOWN and velocidade_y != tamanho: #Se andar pra baixo
                     velocidade_x = 0
                     velocidade_y = tamanho
-                if event.key == pygame.K_text
+                if event.key == pygame.K_r:
+                    jogo()
+                
                     
             print(event)  #printar no prompt o que ta acontecendo
         fundo.fill(preto) #cor de fundo      
