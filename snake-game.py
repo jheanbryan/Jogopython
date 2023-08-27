@@ -28,7 +28,7 @@ def texto(msg, cor):
     
 def cobra(cobraxy):
     for xy in cobraxy:
-        pygame.draw.rect(fundo, branco, [xy[0], xy[1], tamanho, tamanho]) #desenhar o quadrado (serpente)
+        pygame.draw.rect(fundo, verde, [xy[0], xy[1], tamanho, tamanho]) #desenhar o quadrado (serpente)
     
 def maca(pos_x_maca, pos_y_maca):
         pygame.draw.rect(fundo, vermelho, [pos_x_maca, pos_y_maca, tamanho, tamanho]) #desenhar o quadrado (serpente)
@@ -46,15 +46,20 @@ def jogo():
     velocidade_y = 0
     cobraxy = []
     comprimento_cobra = 1
-  
-        
+    
     sair = True
     fim_de_jogo = False
+
     while sair:
         while fim_de_jogo:
             fundo.fill(branco)   
             texto('Game Over. Pressione r para continuar', vermelho)
-            pygame.display.update()             
+            pygame.display.update()
+            for event in pygame.event.get(): #Enquanto acontecer eventos, entra no loop
+                if event.key == pygame.K_r:
+                    print('apertou no r')
+                    jogo()
+
         for event in pygame.event.get(): #Enquanto acontecer eventos, entra no loop
             if event.type == pygame.QUIT: #Se apertar no [X] que fecha o jogo
                 sair = False
@@ -71,10 +76,7 @@ def jogo():
                     velocidade_y = -tamanho
                 if event.key == pygame.K_DOWN and velocidade_y != tamanho: #Se andar pra baixo
                     velocidade_x = 0
-                    velocidade_y = tamanho
-                if event.key == pygame.K_r:
-                    jogo()
-                
+                    velocidade_y = tamanho           
                     
             print(event)  #printar no prompt o que ta acontecendo
         fundo.fill(preto) #cor de fundo      
@@ -95,7 +97,7 @@ def jogo():
         
         if pos_x_cobra == pos_x_maca and pos_y_cobra == pos_y_maca: #Se a serpente comer a maça
             print("pegou a maca")
-            comprimento_cobra+=10
+            comprimento_cobra+=3
             #Maça
             pos_x_maca = randint(0, (largura - tamanho) /10) *10 #posição x
             pos_y_maca = randint(0, (altura - tamanho) /10) *10 #posição y
